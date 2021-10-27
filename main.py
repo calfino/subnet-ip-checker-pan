@@ -38,6 +38,7 @@ def get_webex_ip():
         results.append(regexed)
         
     asd = np.concatenate( results, axis=None )
+    # print(asd)
     return asd
 
 def get_zoom_ip():
@@ -148,10 +149,12 @@ def get_webex_pan(user,pwd):
     b=b.split('[',1)[1]
     b="["+b
     x="[];"
+    
     for spec in x:
         b = b.replace(spec,"")
     b=b.split(' ')
     del b[0]
+    # print(b)
     return b
 
 if __name__ == '__main__':
@@ -160,28 +163,30 @@ if __name__ == '__main__':
     e = get_webex_pan(*c)
     a = get_zoom_ip()
     d = get_webex_ip()
-    print("webex pan",e)
+    # print("webex pan",e)
     nk=set(a).intersection(b)
     wp=set(d).intersection(e)
-
+    # print(wp)
     for x in a:
         test = 0
         if x in nk:
             pass
         else:
             test = 1
-            print (x,'absent in zoom website')
+            print (x,'absent in PAN')
     if test == 0:
-        print('all zoom subnet list all already present on PAN')
+        print('the rest of zoom subnet list are already present on PAN')
+    
+    test = 0
     for x in d:
         test = 0
         if x in wp:
             pass
         else:
             test = 1
-            print (x,'absent in webex website')
+            print (x,'absent in PAN')
     if test == 0:
-        print('all webex subnet list all already present on PAN')
+        print('the rest of webex subnet list are already present on PAN')
 
     abc = input('press enter to exit. . . ')
 
